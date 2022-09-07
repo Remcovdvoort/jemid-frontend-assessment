@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     
-    fetch('https://jemid-warmupapi.azurewebsites.net/api/products?pageSize=1&pageIndex=1')
+    fetch('https://jemid-warmupapi.azurewebsites.net/api/products?pageSize=1&pageIndex=2')
       .then(response => response.json())
       .then(res => { 
         console.log(res)
