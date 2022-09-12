@@ -1,7 +1,91 @@
-.App {
-  text-align: center;
+/* import annie from img folder */
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@600&family=Playfair+Display:wght@500&display=swap');
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Overpass', sans-serif;
+  
 }
 
-li{
-  list-style-type: none;
+header{
+  background: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 17vh;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  border-bottom:ridge 2px #969696; 
 }
+
+.Annie{
+  height: 12vh;
+  padding-left: 100%;
+  margin-top: 8vh;
+  transform: translate(-50%, -50%);
+}
+
+
+.sort{
+  margin: 2rem;
+}
+
+select{
+  font-size: 1.5rem;
+}
+
+
+/* cards ------------------------------------------------------------ */
+
+.container{
+  padding-top: 20vh;
+  max-width: 100rem;
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+.stacked{
+  display: grid;
+}
+
+.stacked > *{
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.product-grid{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.card{
+  aspect-ratio: 1 / 1.5;
+}
+
+.card__content{
+  background: white;
+  align-self: end;
+  margin: .5rem .5rem 2rem;
+  padding: .5rem;
+  box-shadow: 0 .25rem 1rem rgb(0 0 0 / 0.2);
+}
+
+.card__title{
+  font-size: 1.25rem;
+  line-height: 1.1;
+  color: firebrick;
+}
+
+.card__price{
+  font-size: 1.75rem;
+}
+
+.card__img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
