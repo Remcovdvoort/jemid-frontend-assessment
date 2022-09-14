@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import annie from "./img/Anniee.png";
 import SearchBar from "./components/SearchBar";
+import PriceSlider from "./components/PriceSlider";
+import { Filters } from "./containers/Filters";
+import Box from "@mui/material/Box";
+import HeightSlider from "./components/HeightSlider";
+import DiameterSlider from "./components/DiameterSlider";
 
 function App() {
   const [plants, setPlants] = useState([]);
-  // const [error, setError] = useState({});
 
   interface Product {
     id: number;
@@ -29,7 +33,6 @@ function App() {
       });
   }, []);
 
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -37,11 +40,36 @@ function App() {
         <header>
           
           <img className="Annie" src={annie} alt="" />
-          <SearchBar />
+          
         </header>
-
+        
         <main>
+        
           <div className="container">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "center",
+                p: 3,
+                m: 1,
+                bgcolor: "#eaf8e7",
+                boxShadow: 1,
+                borderRadius: 1,
+                width: "80%",
+                margin: "30px auto",
+                height: "180px",
+              }}
+            >
+
+          <SearchBar />
+          <PriceSlider/>
+          <HeightSlider/>
+          <DiameterSlider/>
+          <Filters/>
+          </Box>
             <div className="product-grid">
               {plants.map((plant: Product) => (
                 <div className="card stacked" key={plant.id}>
