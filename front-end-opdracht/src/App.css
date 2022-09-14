@@ -11,9 +11,7 @@
 
 header{
   background: white;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 17vh;
+  height: 24vh;
   width: 100%;
   position: fixed;
   z-index: 10;
@@ -21,26 +19,22 @@ header{
 }
 
 .Annie{
-  height: 12vh;
+  height: 8vh;
   padding-left: 100%;
   margin-top: 8vh;
   transform: translate(-50%, -50%);
+  cursor: pointer;
 }
 
 
-.sort{
-  margin: 2rem;
-}
 
-select{
-  font-size: 1.5rem;
-}
+
 
 
 /* cards ------------------------------------------------------------ */
 
 .container{
-  padding-top: 20vh;
+  padding-top: 30vh;
   max-width: 100rem;
   margin-inline: auto;
   padding-inline: 2rem;
@@ -57,12 +51,19 @@ select{
 
 .product-grid{
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
 
 .card{
   aspect-ratio: 1 / 1.5;
+  transition: all 0.4s ease;
+}
+
+.card:hover{
+  transform: scale(1.07);
+  transition: all 0.4s ease;
+  cursor: pointer;
 }
 
 .card__content{
@@ -73,7 +74,7 @@ select{
   box-shadow: 0 .25rem 1rem rgb(0 0 0 / 0.2);
 }
 
-.card__title{
+.card__name{
   font-size: 1.25rem;
   line-height: 1.1;
   color: firebrick;
