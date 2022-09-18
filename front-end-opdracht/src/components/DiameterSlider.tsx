@@ -14,15 +14,14 @@ export default function DiameterSlider() {
 
   return (
     <Box
-      sx={{
-        width: 300,
-        borderWidth: 1,
-        display: "flex",
-        justifyContent: "space-between",
-        margin: "20px",
-
-      }}
-    >
+    sx={{
+      width: 300,
+      borderWidth: 1,
+      display: "flex",
+      justifyContent: "space-between",
+      margin: "20px auto",
+    }}
+      >
       <StepLabel sx={{
         color: "black",
         padding: "0 10px",
@@ -33,7 +32,6 @@ export default function DiameterSlider() {
         getAriaLabel={() => "height range"}
         value={value}
         onChange={handleChange}
-        valueLabelDisplay="auto"
       />
       <StepLabel sx={{
         color: "black",

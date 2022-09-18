@@ -14,15 +14,13 @@ export default function PriceSlider() {
 
   return (
     <Box
-      sx={{
-        width: 300,
-        borderWidth: 1,
-        display: "flex",
-        justifyContent: "space-between",
-        margin: "20px auto",
-        color: "black",
-
-      }}
+    sx={{
+      width: 300,
+      borderWidth: 1,
+      display: "flex",
+      justifyContent: "space-between",
+      margin: "20px auto",
+    }}
     >
       <StepLabel sx={{
         color: "black",

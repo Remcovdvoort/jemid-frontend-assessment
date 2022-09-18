@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import annie from "./img/Anniee.png";
+import "./styles/App.css";
+import annie from "./img/Annie1.png";
+import monstera from "./img/monstera.jpg";
 import SearchBar from "./components/SearchBar";
-import PriceSlider from "./components/PriceSlider";
 import { Filters } from "./containers/Filters";
 import Box from "@mui/material/Box";
-import HeightSlider from "./components/HeightSlider";
-import DiameterSlider from "./components/DiameterSlider";
+import { DropdownWrapper } from "./components/FilterDropdown";
 
 function App() {
   const [plants, setPlants] = useState([]);
@@ -33,43 +32,59 @@ function App() {
       });
   }, []);
 
-
   return (
     <>
       <div className="App">
         <header>
-          
           <img className="Annie" src={annie} alt="" />
-          
         </header>
-        
+
         <main>
-        
+          <div
+            style={{
+              width: "100vw",
+              height: "100vh",
+              position: "absolute",
+              background:
+                "linear-gradient(rgba(0,0,0, 0.1), rgba(0,0,0, 0.1)), url(" +
+                monstera +
+                ")",
+              backgroundAttachment: "fixed",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              margin: "0",
+              padding: "0",
+              zIndex: "-1",
+            }}
+          />
+
           <div className="container">
             <Box
               sx={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                alignItems: "center",
-                justifyContent: "center",
-                p: 3,
-                m: 1,
-                bgcolor: "#eaf8e7",
-                boxShadow: 1,
-                borderRadius: 1,
-                width: "80%",
-                margin: "30px auto",
-                height: "180px",
+                paddingLeft: "53%",
+                width: "100%",
+                height: "100%",
+                marginTop: "100vh",
+                marginBottom: "5rem",
               }}
             >
+              <DropdownWrapper
+                img="Filter"
+                children={
+                  <Box
+                    sx={{
+                      width: "50vw",
+                      height: "33vh",
+                    }}
+                  >
+                    <SearchBar />
+                    <Filters />
+                  </Box>
+                }
+              />
+            </Box>
 
-          <SearchBar />
-          <PriceSlider/>
-          <HeightSlider/>
-          <DiameterSlider/>
-          <Filters/>
-          </Box>
             <div className="product-grid">
               {plants.map((plant: Product) => (
                 <div className="card stacked" key={plant.id}>

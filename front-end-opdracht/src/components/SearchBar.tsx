@@ -11,18 +11,20 @@ export default function CustomizedInputBase() {
     <Paper 
         component="form"
         sx={{
-        m: '0 auto', 
+        m: '5px auto', 
         p: "10px 4px", 
         display: "flex", 
         alignItems: "center", 
-        width: '50%', 
+        width: '70%', 
         height: 50, 
         borderRadius: 4, 
-        border: 'solid 1px', 
-        backgroundColor: "white" }}
+        color: "#b394cb",
+        border: '3px solid #b394cb', 
+        backgroundColor: "rgb(241, 225, 254)",
+       }}
         >
       <InputBase
-        sx={{ ml: 1, flex: 1 }}
+        sx={{ ml: 1, flex: 1, color: "#b394cb", fontWeight: "bold"}}
         placeholder="Zoek een plant"
         inputProps={{ "aria-label": "search" }}
       />
