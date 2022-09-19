@@ -34,8 +34,9 @@ header{
 /* cards ------------------------------------------------------------ */
 
 .container{
+  
   padding-top: 5vh;
-  max-width: 100rem;
+  max-width: 99vw;
   margin-inline: auto;
 }
 
@@ -77,7 +78,7 @@ header{
 .card__name{
   font-size: 1.25rem;
   line-height: 1.1;
-  color: firebrick;
+  color: #a979cd;
 }
 
 .card__price{
@@ -89,4 +90,102 @@ header{
   aspect-ratio: 1 / 1;
   object-fit: cover;
 }
+
+
+/* detailpage ------------------------------------------------------------ */
+
+.container__detail{
+  padding-top: 20vh;
+  max-width: 100rem;
+  margin-inline: auto;
+}
+
+.plant{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  /* wrap */
+  flex-wrap: wrap;
+}
+
+.plant h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.plant__data{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 5rem;
+}
+
+.plant__data p{
+  transform: translate(50%, 50%);
+  font-size: 20px;
+}
+
+.plant__description{
+  width: 28vw;
+}
+
+.plant img{
+  width: 40vw;
+}
+
+.prijs{
+  color: #a979cd;
+  font-size: 30px;
+  font-weight: bold;
+  border: 3px solid #a979cd;
+  border-radius: 5px;
+  margin-top: 5vh;
+  margin-left: 5vw;
+  width: 8vw;
+  padding: .5rem;
+}
+
+
+
+/* footer ------------------------------------------------------------ */
+
+
+.footer__text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.footer__p, .footer__h1{
+  font-size: larger;
+  font-weight: 00;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+.footer__h1{
+  font-size: 60px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin-top: 8%;
+}
+
+footer a{
+  color: rgb(255, 255, 255);
+}
+
+footer a:hover{
+  cursor: pointer;
+  color: rgba(58, 106, 177, 1);
+  transition: ease 0.4s;
+}
+
+
 
