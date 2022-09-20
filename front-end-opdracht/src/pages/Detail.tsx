@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 interface Product {
@@ -47,11 +48,10 @@ const Detail = () => {
                 <p>Bewateringsbehoefte: {plant.wateringNeeds}</p>
                 <p className="prijs">€{plant.price}</p>
             </div>
-            
           </div>
-          
         ))}
       </div>
+      <Footer/>
     </>
   );
 };

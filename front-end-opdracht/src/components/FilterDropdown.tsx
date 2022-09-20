@@ -4,12 +4,13 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { styled } from '@mui/material';
 import { Menu, MenuProps} from '@mui/material';
 import Box from '@mui/material/Box';
+import Filter from '../img/filter_purple.png';
 
 const StyledMenu = styled((props : MenuProps) => (
     <Menu
-        elevation={0}
+        elevation={3}
         anchorOrigin={{
-            vertical:'top',
+            vertical:'bottom',
             horizontal:'center',
         }}
         transformOrigin={{
@@ -20,13 +21,12 @@ const StyledMenu = styled((props : MenuProps) => (
     />
 ))(({ theme }) => ({
     '& .MuiPaper-root': {
-        borderRadius: 6,
-        
-        marginTop: theme.spacing(1),
+        marginTop: theme.spacing(3),
         minWidth: 180,
         '& .MuiMenu-list': {
             padding: '20px 5px',
-            border: '1px solid #b394cb',
+            border: '3px solid #d0b3e7',
+            backgroundColor: '#fbf6ff'
         },
         '& .MuiMenuItem-root': {
             '& .MuiSvgIcon-root': {
@@ -36,6 +36,7 @@ const StyledMenu = styled((props : MenuProps) => (
             },
             '&:active': {
                 backgroundColor: theme.palette.action.selected,
+                margin: '0 10px',
             },
         },
     },
@@ -55,6 +56,7 @@ export const DropdownWrapper: React.FC<FilterWrapperProps> = ({ img, children })
         setAnchorEl(event.currentTarget);
     };
 
+
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -63,14 +65,10 @@ export const DropdownWrapper: React.FC<FilterWrapperProps> = ({ img, children })
         <div>
             <Button
                 id="dropdown-button"
-                aria-haspopup="true"
                 variant="outlined"
-                disableElevation
-               
                 onClick={handleClick}
                 endIcon={<KeyboardArrowDownIcon/>}
                 style={{
-
                     color: "#b394cb",
                     textTransform: "none",
                     fontWeight: "bold",
@@ -83,10 +81,9 @@ export const DropdownWrapper: React.FC<FilterWrapperProps> = ({ img, children })
                 }}
 
             >
-                {img}
+                <img src={Filter} alt="filter" style={{width: "30px", height: "30px", marginRight: "10px"}}/>
             </Button>
             <StyledMenu
-                id='demo-menu'
                 MenuListProps={{
                     'aria-labelledby': 'dropdown-menu'
                 }} 
