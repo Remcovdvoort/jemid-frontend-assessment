@@ -20,7 +20,6 @@ export default function HeightSlider() {
         display: "flex",
         justifyContent: "space-between",
         margin: "20px auto",
-
       }}
     >
       <StepLabel sx={{

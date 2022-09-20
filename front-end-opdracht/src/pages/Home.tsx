@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import monstera from "../img/monstera.jpg";
-import { Filters } from "../containers/Filters";
 import Box from "@mui/material/Box";
 import { DropdownWrapper } from "../components/FilterDropdown";
+import { Dropdown } from "../components/Dropdown";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import SearchIcon from "@mui/icons-material/Search";
-import { InputBase, Paper } from "@mui/material";
-import InputIcon from "@mui/material/IconButton";
+import { Button, InputBase, Paper, Slider, StepLabel } from "@mui/material";
+import DropDown from "../components/DropdownStPlace";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
+
 
 interface Product {
   id: number;
@@ -25,17 +27,47 @@ interface Product {
 const Home = () => {
   const [text, setText] = useState("");
   const [plants, setPlant] = useState([]);
+  const [valueH, setValueH] = useState<number[]>([20, 200]);
+  const [valueD, setValueD] = useState<number[]>([20, 100]);
+  const [minHeight, setMinHeight] = useState(0);
+  const [maxHeight, setMaxHeight] = useState(200);
+  const [minDiameter, setMinDiameter] = useState(0);
+  const [maxDiameter, setMaxDiameter] = useState(100);
+
+  const [standingPlace, setSPlace] = useState<string>("");
+  const standingPlaces = () => {
+    return ["Sun", "Partial", "Shadow"];
+  };
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+
   let pageSize = 10;
 
   const handleOnClick = () => {
     fetch(
-      `https://jemid-warmupapi.azurewebsites.net/api/products?pageSize=${pageSize}&pageIndex=0&nameFilter=${text}`
+      `https://jemid-warmupapi.azurewebsites.net/api/products?pageSize=${pageSize}&pageIndex=0&standingPlaceFilters=${standingPlace}&nameFilter=${text}&heightMinimumFilter=${minHeight}&heightMaximumFilter=${maxHeight}&diameterMinimumFilter=${minDiameter}&diameterMaximumFilter=${maxDiameter}`
     )
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
+        console.log(
+          `https://jemid-warmupapi.azurewebsites.net/api/products?pageSize=${pageSize}&pageIndex=0&standingPlaceFilters=${standingPlace}&nameFilter=${text}&heightMinimumFilter=${minHeight}&heightMaximumFilter=${maxHeight}&diameterMinimumFilter=${minDiameter}&diameterMaximumFilter=${maxDiameter}`
+        );
         setPlant(res.products);
       });
+  };
+
+  const toggleDropDown = () => {
+    setShowDropDown(!showDropDown);
+  };
+
+  const standingSelection = (standing: string): void => {
+    setSPlace(standing);
+  };
+
+  const dismissHandler = (event: React.FocusEvent<HTMLButtonElement>): void => {
+    if (event.currentTarget === event.target) {
+      setShowDropDown(false);
+    }
   };
 
   useEffect(() => {
@@ -48,7 +80,6 @@ const Home = () => {
         setPlant(res.products);
       });
   }, []);
-
 
   return (
     <>
@@ -76,7 +107,6 @@ const Home = () => {
         <div className="container">
           <Box
             sx={{
-              paddingLeft: "53%",
               width: "100%",
               height: "100%",
               marginTop: "100vh",
@@ -89,13 +119,13 @@ const Home = () => {
                 <Box
                   sx={{
                     width: "50vw",
-                    height: "27vh",
+                    height: "39vh",
                   }}
                 >
                   <Paper
                     sx={{
-                      m: "5px auto",
-                      p: "10px 4px",
+                      m: "0px auto",
+                      p: "0px 4px",
                       display: "flex",
                       alignItems: "center",
                       width: "70%",
@@ -119,19 +149,197 @@ const Home = () => {
                       inputProps={{ "aria-label": "search" }}
                       onChange={(e) => setText(e.target.value)}
                     />
-                    <InputIcon
-                      disabled={!text}
-                      type="submit"
-                      value="Submit"
-                      sx={{ p: "10px" }}
-                      aria-label="search"
-                      onClick={handleOnClick}
-                    >
-                      <SearchIcon />
-                    </InputIcon>
                   </Paper>
+                  <Box
+                    sx={{
+                      width: 300,
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      gap: 3,
+                      margin: "30px auto",
+                    }}
+                  >
+                    <Dropdown label="Hoogte">
+                      <Box
+                        sx={{
+                          width: 300,
+                          borderWidth: 1,
+                          display: "flex",
+                          justifyContent: "space-between",
+                          margin: "20px auto",
+                        }}
+                      >
+                        <StepLabel
+                          sx={{
+                            color: "black",
+                            padding: "0 10px",
+                          }}
+                        >
+                          {valueH[0]}cm
+                        </StepLabel>
+                        <Slider
+                          getAriaLabel={() => "height range"}
+                          value={valueH}
+                          onChange={(Event, newValue) => {
+                            setValueH(newValue as number[]);
+                            setMinHeight(newValue[0]);
+                            setMaxHeight(newValue[1]);
+                          }}
+                          onChangeCommitted={(Event, newValue) => {
+                            setValueH(newValue as number[]);
+                            setMinHeight(newValue[0]);
+                            setMaxHeight(newValue[1]);
+                          }}
+                          valueLabelDisplay="auto"
+                          min={20}
+                          max={200}
+                          sx={{
+                            color: "#b394cb",
+                            height: 5,
+                          }}
+                        />
+                        <StepLabel
+                          sx={{
+                            color: "black",
+                            padding: "0 10px",
+                          }}
+                        >
+                          {valueH[1]}cm
+                        </StepLabel>
+                      </Box>
+                    </Dropdown>
+                    <Dropdown label="Diameter">
+                      <Box
+                        sx={{
+                          width: 300,
+                          borderWidth: 1,
+                          display: "flex",
+                          justifyContent: "space-between",
+                          margin: "20px auto",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            width: 300,
+                            borderWidth: 1,
+                            display: "flex",
+                            justifyContent: "space-between",
+                            margin: "20px auto",
+                          }}
+                        >
+                          <StepLabel
+                            sx={{
+                              color: "black",
+                              padding: "0 10px",
+                            }}
+                          >
+                            {valueD[0]}cm
+                          </StepLabel>
+                          <Slider
+                            getAriaLabel={() => "Diameter range"}
+                            value={valueD}
+                            onChange={(Event, newValue) => {
+                              setValueD(newValue as number[]);
+                              setMinDiameter(newValue[0]);
+                              setMaxDiameter(newValue[1]);
+                            }}
+                            valueLabelDisplay="auto"
+                            min={20}
+                            max={100}
+                            sx={{
+                              color: "#b394cb",
+                              height: 5,
+                            }}
+                          />
+                          <StepLabel
+                            sx={{
+                              color: "black",
+                              padding: "0 10px",
+                            }}
+                          >
+                            {valueD[1]}cm
+                          </StepLabel>
+                        </Box>
+                      </Box>
+                    </Dropdown>
 
-                  <Filters />
+                    <Button
+                      sx={{
+                        color: "#b394cb",
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        backgroundColor: "rgb(241, 225, 254)",
+                        borderRadius: "6px",
+                        transform: "translateX(-95px)",
+                        marginTop: "15px",
+                        height: "40px",
+                        border: "3px solid #b394cb",
+                        padding: "3rem 4rem",
+                        
+                        "&:hover": {
+                          backgroundColor: "rgb(241, 225, 254)",
+                        },
+
+                      }}
+                      className={showDropDown ? "active" : undefined}
+                      onClick={(): void => toggleDropDown()}
+                    >
+                      
+                      {!showDropDown && (
+                        <>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                          }}
+                        >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                          }}
+                        >Standplaats <KeyboardArrowDownIcon/></Box>
+                      
+                      <div>{standingPlace} </div>
+                      </Box>
+                      </>
+                      )}
+
+
+                      {showDropDown && (
+                        <DropDown
+                          stPlaces={standingPlaces()}
+                          showDropDown={false}
+                          toggleDropDown={(): void => toggleDropDown()}
+                          standingSelection={standingSelection}
+                        />
+                      )}
+                    </Button>
+
+                   
+                  </Box>
+                  <Button
+                      onClick={handleOnClick}
+                      variant="contained"
+                      component="label"
+                      sx={{
+                      m: "0px auto",
+                      p: "0px 4px",
+                      display: "flex",
+                      alignItems: "center",
+                      width: "97%",
+                      height: 50,
+                      borderRadius: 2,
+                      color: "white",
+                      backgroundColor: "#b394cb",
+                        "&:hover": {
+                          backgroundColor: "#9679a0",
+                        },
+                      }}
+                    >
+                      Toepassen
+                    </Button>
                 </Box>
               }
             />
@@ -142,10 +350,7 @@ const Home = () => {
               <Link
                 to={`/Detail/${plant.name}`}
                 style={{
-                  paddingInline: "2rem",
-                  display: "grid",
-                  gap: "1rem",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(15rem, 1fr))",
+                  paddingInline: "5rem",
                   textDecoration: "none",
                   color: "black",
                 }}

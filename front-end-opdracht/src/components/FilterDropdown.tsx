@@ -11,11 +11,11 @@ const StyledMenu = styled((props : MenuProps) => (
         elevation={3}
         anchorOrigin={{
             vertical:'bottom',
-            horizontal:'center',
+            horizontal:'right',
         }}
         transformOrigin={{
             vertical:'top',
-            horizontal:'center',
+            horizontal:'right',
         }}
         {...props}
     />
@@ -24,7 +24,7 @@ const StyledMenu = styled((props : MenuProps) => (
         marginTop: theme.spacing(3),
         minWidth: 180,
         '& .MuiMenu-list': {
-            padding: '20px 5px',
+            padding: '20px 3px',
             border: '3px solid #d0b3e7',
             backgroundColor: '#fbf6ff'
         },
@@ -36,7 +36,7 @@ const StyledMenu = styled((props : MenuProps) => (
             },
             '&:active': {
                 backgroundColor: theme.palette.action.selected,
-                margin: '0 10px',
+                margin: '0 40px',
             },
         },
     },
@@ -74,10 +74,9 @@ export const DropdownWrapper: React.FC<FilterWrapperProps> = ({ img, children })
                     fontWeight: "bold",
                     backgroundColor: "rgb(241, 225, 254)",
                     borderRadius: "6px",    
-                    transform: "translateX(-95px)",
-                    marginTop: "15px",
                     height: "50px",
                     border : "3px solid #b394cb",
+                    marginLeft: "88%",
                 }}
 
             >

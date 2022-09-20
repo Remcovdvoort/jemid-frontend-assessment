@@ -5,11 +5,13 @@ import StepLabel from "@mui/material/StepLabel";
 
 export default function DiameterSlider() {
   const [value, setValue] = useState<number []>([20, 60]);
+  const [minDiameter, setMinDiameter] = useState<number>(20);
+  const [maxDiameter, setMaxDiameter] = useState<number>(60);
 
-    const handleChange = (event: Event, newValue: number | number[]) => { 
+
+    const handleChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number[]);
     };
-
 
 
   return (
@@ -27,11 +29,21 @@ export default function DiameterSlider() {
         padding: "0 10px",
       }}>{value[0]}cm</StepLabel>
       <Slider
-        min={0}
-        max={80}
-        getAriaLabel={() => "height range"}
+        getAriaLabel={() => "diameter range"}
         value={value}
-        onChange={handleChange}
+        onChange={(event, newValue) => {
+          setValue(newValue as number[]);
+          setMinDiameter(newValue[0]);
+          setMaxDiameter(newValue[1]);
+        }}
+        valueLabelDisplay="auto"
+        min={20}
+        max={200}
+        sx={{
+          color: "#b394cb",
+          height: 5,
+
+        }}
       />
       <StepLabel sx={{
         color: "black",

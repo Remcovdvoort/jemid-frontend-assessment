@@ -50,7 +50,7 @@ interface DropdownWrapperProps {
     children: JSX.Element | JSX.Element[];
 }
 
-export const DropdownWrapper: React.FC<DropdownWrapperProps> = ({ label, children }) => {
+export const Dropdown: React.FC<DropdownWrapperProps> = ({ label, children }) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 

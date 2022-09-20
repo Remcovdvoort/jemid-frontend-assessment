@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 
 interface Product {
   id: number;
@@ -33,7 +35,32 @@ const Detail = () => {
   return (
     <>
       <Header />
+      {/* terug naar homepage */}
+      
       <div className="container__detail">
+        <Link to="/"
+          style={{
+            textDecoration: "none",
+            color: "#a979cd",
+            border: "3px solid #a979cd",
+            padding: "15px",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            height: "70vh",
+          }}
+        >
+        <ArrowBackIcon 
+        style={{
+          height: "15px",
+          marginTop: "15px",
+          
+
+        }}
+        />
+        terug naar overzicht
+        </Link>
+
+
         {plants.map((plant: Product) => (
           <div className="plant" key={plant.id}>
             <img src={plant.photoUrl} alt={plant.name} />

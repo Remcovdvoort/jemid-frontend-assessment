@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import DiameterSlider from "../components/DiameterSlider";
-import { DropdownWrapper } from "../components/Dropdown";
+import { Dropdown } from "../components/Dropdown";
 import HeightSlider from "../components/HeightSlider";
 import PriceSlider from "../components/PriceSlider";
 
@@ -16,24 +16,25 @@ export const Filters = () => {
             gap: 3,
             margin : "30px auto",
         }}>
-            <DropdownWrapper 
+            <Dropdown
             label="Prijs"
             >  
             <PriceSlider/>
-            </DropdownWrapper>
+            </Dropdown>
 
-            <DropdownWrapper 
+            <Dropdown 
             label="Hoogte"
             >  
             <HeightSlider/>
-            </DropdownWrapper>
+            </Dropdown>
 
-            <DropdownWrapper 
+            <Dropdown 
             label="Diameter"
             >  
             <DiameterSlider/>
-            </DropdownWrapper>
-            <Button disabled>Verwijder alle filters</Button>
+            </Dropdown>
+            <Button 
+            disabled>Verwijder alle filters</Button>
         </Box>
         
     )
