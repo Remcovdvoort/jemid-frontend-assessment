@@ -1,4 +1,3 @@
-import React from "react";
 import monstera from "../img/monstera.jpg";
 
 export default function Footer() {

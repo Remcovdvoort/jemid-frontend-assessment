@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import monstera from "../img/monstera.jpg";
 import Box from "@mui/material/Box";
 import { DropdownWrapper } from "../components/FilterDropdown";
@@ -8,9 +8,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button, InputBase, Paper, Slider, StepLabel } from "@mui/material";
 import DropDown from "../components/DropdownStPlace";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
-
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 interface Product {
   id: number;
@@ -33,7 +31,6 @@ const Home = () => {
   const [maxHeight, setMaxHeight] = useState(200);
   const [minDiameter, setMinDiameter] = useState(0);
   const [maxDiameter, setMaxDiameter] = useState(100);
-
   const [standingPlace, setSPlace] = useState<string>("");
   const standingPlaces = () => {
     return ["Sun", "Partial", "Shadow"];
@@ -48,12 +45,23 @@ const Home = () => {
     )
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
-        console.log(
-          `https://jemid-warmupapi.azurewebsites.net/api/products?pageSize=${pageSize}&pageIndex=0&standingPlaceFilters=${standingPlace}&nameFilter=${text}&heightMinimumFilter=${minHeight}&heightMaximumFilter=${maxHeight}&diameterMinimumFilter=${minDiameter}&diameterMaximumFilter=${maxDiameter}`
-        );
         setPlant(res.products);
       });
+  };
+
+  const handleReset = () => {
+    fetch(
+      `https://jemid-warmupapi.azurewebsites.net/api/products?pageSize=${pageSize}&pageIndex=0`
+    )
+      .then((response) => response.json())
+      .then((res) => {
+        console.log(res);
+        setPlant(res.products);
+      });
+    setSPlace("");
+    setText("");
+    setValueH([20, 200]);
+    setValueD([20, 100]);
   };
 
   const toggleDropDown = () => {
@@ -62,12 +70,6 @@ const Home = () => {
 
   const standingSelection = (standing: string): void => {
     setSPlace(standing);
-  };
-
-  const dismissHandler = (event: React.FocusEvent<HTMLButtonElement>): void => {
-    if (event.currentTarget === event.target) {
-      setShowDropDown(false);
-    }
   };
 
   useEffect(() => {
@@ -118,8 +120,8 @@ const Home = () => {
               children={
                 <Box
                   sx={{
-                    width: "50vw",
-                    height: "39vh",
+                    minWidth: "45vw",
+                    minHeight: "49vh",
                   }}
                 >
                   <Paper
@@ -164,68 +166,68 @@ const Home = () => {
                       <Box
                         sx={{
                           width: 300,
-                          borderWidth: 1,
                           display: "flex",
-                          justifyContent: "space-between",
-                          margin: "20px auto",
+                          margin: "40px auto",
                         }}
                       >
-                        <StepLabel
+                        <Box
                           sx={{
-                            color: "black",
-                            padding: "0 10px",
+                            width: 300,
+                            display: "flex",
                           }}
                         >
-                          {valueH[0]}cm
-                        </StepLabel>
-                        <Slider
-                          getAriaLabel={() => "height range"}
-                          value={valueH}
-                          onChange={(Event, newValue) => {
-                            setValueH(newValue as number[]);
-                            setMinHeight(newValue[0]);
-                            setMaxHeight(newValue[1]);
-                          }}
-                          onChangeCommitted={(Event, newValue) => {
-                            setValueH(newValue as number[]);
-                            setMinHeight(newValue[0]);
-                            setMaxHeight(newValue[1]);
-                          }}
-                          valueLabelDisplay="auto"
-                          min={20}
-                          max={200}
-                          sx={{
-                            color: "#b394cb",
-                            height: 5,
-                          }}
-                        />
-                        <StepLabel
-                          sx={{
-                            color: "black",
-                            padding: "0 10px",
-                          }}
-                        >
-                          {valueH[1]}cm
-                        </StepLabel>
+                          <StepLabel
+                            sx={{
+                              color: "black",
+                              padding: "0 10px",
+                            }}
+                          >
+                            {valueH[0]}cm
+                          </StepLabel>
+                          <Slider
+                            getAriaLabel={() => "height range"}
+                            value={valueH}
+                            onChange={(Event, newValue) => {
+                              setValueH(newValue as number[]);
+                              setMinHeight(newValue[0]);
+                              setMaxHeight(newValue[1]);
+                            }}
+                            onChangeCommitted={(Event, newValue) => {
+                              setValueH(newValue as number[]);
+                              setMinHeight(newValue[0]);
+                              setMaxHeight(newValue[1]);
+                            }}
+                            valueLabelDisplay="auto"
+                            min={20}
+                            max={200}
+                            sx={{
+                              color: "#b394cb",
+                              height: 5,
+                            }}
+                          />
+                          <StepLabel
+                            sx={{
+                              color: "black",
+                              padding: "0 10px",
+                            }}
+                          >
+                            {valueH[1]}cm
+                          </StepLabel>
+                        </Box>
                       </Box>
                     </Dropdown>
                     <Dropdown label="Diameter">
                       <Box
                         sx={{
                           width: 300,
-                          borderWidth: 1,
                           display: "flex",
-                          justifyContent: "space-between",
-                          margin: "20px auto",
+                          margin: "40px auto",
                         }}
                       >
                         <Box
                           sx={{
                             width: 300,
-                            borderWidth: 1,
                             display: "flex",
-                            justifyContent: "space-between",
-                            margin: "20px auto",
                           }}
                         >
                           <StepLabel
@@ -276,36 +278,35 @@ const Home = () => {
                         height: "40px",
                         border: "3px solid #b394cb",
                         padding: "3rem 4rem",
-                        
+
                         "&:hover": {
                           backgroundColor: "rgb(241, 225, 254)",
                         },
-
                       }}
                       className={showDropDown ? "active" : undefined}
                       onClick={(): void => toggleDropDown()}
                     >
-                      
                       {!showDropDown && (
                         <>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                          }}
-                        >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                          }}
-                        >Standplaats <KeyboardArrowDownIcon/></Box>
-                      
-                      <div>{standingPlace} </div>
-                      </Box>
-                      </>
-                      )}
+                          <Box
+                            sx={{
+                              display: "flex",
+                              flexDirection: "column",
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                              }}
+                            >
+                              Standplaats <KeyboardArrowDownIcon />
+                            </Box>
 
+                            <div>{standingPlace} </div>
+                          </Box>
+                        </>
+                      )}
 
                       {showDropDown && (
                         <DropDown
@@ -316,15 +317,28 @@ const Home = () => {
                         />
                       )}
                     </Button>
-
-                   
+                    {standingPlace === "" && (
+                      <Box
+                        sx={{
+                          color: "red",
+                          fontSize: ".9rem",
+                          transform: "translateX(-95px)",
+                          marginTop: "40px",
+                          textAlign: "center",
+                        }}
+                      >
+                        {" "}
+                        Selecteer een standplaats
+                      </Box>
+                    )}
                   </Box>
                   <Button
-                      onClick={handleOnClick}
-                      variant="contained"
-                      component="label"
-                      sx={{
-                      m: "0px auto",
+                    onClick={handleOnClick}
+                    variant="contained"
+                    component="label"
+                    disabled={standingPlace === ""}
+                    sx={{
+                      m: "5px auto",
                       p: "0px 4px",
                       display: "flex",
                       alignItems: "center",
@@ -333,13 +347,36 @@ const Home = () => {
                       borderRadius: 2,
                       color: "white",
                       backgroundColor: "#b394cb",
-                        "&:hover": {
-                          backgroundColor: "#9679a0",
-                        },
-                      }}
-                    >
-                      Toepassen
-                    </Button>
+                      "&:hover": {
+                        backgroundColor: "#9679a0",
+                      },
+                    }}
+                  >
+                    Toepassen
+                  </Button>
+
+                  <Button
+                    onClick={handleReset}
+                    variant="contained"
+                    component="label"
+                    disabled={standingPlace === ""}
+                    sx={{
+                      m: "0px auto",
+                      p: "0px 4px",
+                      display: "flex",
+                      alignItems: "center",
+                      width: "97%",
+                      height: 50,
+                      borderRadius: 2,
+                      color: "white",
+                      backgroundColor: "red",
+                      "&:hover": {
+                        backgroundColor: "red",
+                      },
+                    }}
+                  >
+                    Reset
+                  </Button>
                 </Box>
               }
             />

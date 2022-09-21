@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 interface Product {
   id: number;
@@ -35,10 +34,10 @@ const Detail = () => {
   return (
     <>
       <Header />
-      {/* terug naar homepage */}
-      
+
       <div className="container__detail">
-        <Link to="/"
+        <Link
+          to="/"
           style={{
             textDecoration: "none",
             color: "#a979cd",
@@ -49,17 +48,14 @@ const Detail = () => {
             height: "70vh",
           }}
         >
-        <ArrowBackIcon 
-        style={{
-          height: "15px",
-          marginTop: "15px",
-          
-
-        }}
-        />
-        terug naar overzicht
+          <ArrowBackIcon
+            style={{
+              height: "15px",
+              marginTop: "15px",
+            }}
+          />
+          terug naar overzicht
         </Link>
-
 
         {plants.map((plant: Product) => (
           <div className="plant" key={plant.id}>
@@ -71,14 +67,14 @@ const Detail = () => {
             <div className="plant__data">
               <p>Hoogte: {plant.height}cm</p>
               <p>Diameter: {plant.diameter}cm</p>
-                <p>Standplaats: {plant.standingPlace}</p>
-                <p>Bewateringsbehoefte: {plant.wateringNeeds}</p>
-                <p className="prijs">€{plant.price}</p>
+              <p>Standplaats: {plant.standingPlace}</p>
+              <p>Bewateringsbehoefte: {plant.wateringNeeds}</p>
+              <p className="plant__prijs">€{plant.price}</p>
             </div>
           </div>
         ))}
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

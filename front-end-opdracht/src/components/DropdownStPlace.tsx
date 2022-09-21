@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 type DropDownProps = {
   stPlaces: string[];
@@ -7,11 +7,12 @@ type DropDownProps = {
   standingSelection: Function;
 };
 
-
-const DropDown: React.FC<DropDownProps> = ({stPlaces,standingSelection}: DropDownProps): JSX.Element => {
+const DropDown: React.FC<DropDownProps> = ({
+  stPlaces,
+  standingSelection,
+}: DropDownProps): JSX.Element => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
 
-  
   const onClickHandler = (standing: string): void => {
     standingSelection(standing);
   };
@@ -22,21 +23,19 @@ const DropDown: React.FC<DropDownProps> = ({stPlaces,standingSelection}: DropDow
 
   return (
     <>
-      <div className={showDropDown ? 'dropdown' : 'dropdown active'}>
-        {stPlaces.map(
-          (standing: string, index: number): JSX.Element => {
-            return (
-              <p
-                key={index}
-                onClick={(): void => {
-                  onClickHandler(standing);
-                }}
-              >
-                {standing}
-              </p>
-            );
-          }
-        )}
+      <div className={showDropDown ? "dropdown" : "dropdown active"}>
+        {stPlaces.map((standing: string, index: number): JSX.Element => {
+          return (
+            <p
+              key={index}
+              onClick={(): void => {
+                onClickHandler(standing);
+              }}
+            >
+              {standing}
+            </p>
+          );
+        })}
       </div>
     </>
   );
